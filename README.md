@@ -1,6 +1,6 @@
 # Gaming
 Utility to display stats from a gaming session
-testing
+
 
 # Datadog
 In the initial state, contains agent configuration files with the assumption the agent is already installed and running on a windows machine  
@@ -11,6 +11,7 @@ Contains terraform templates to create datadog monitors and dashboards that will
 
 # Known Issues
 Currently only works with games running through steam, and sometimes inconsistently (ie, bladur's gate runs using ../bin/bg3.exe and thus is not cautght by steamapps)  
+Some games don't really have any indication what they are (ie, slay the spire shows as javaw)  
 Dashboard needs to be referenced in a more robust way  
 Getting stats from Nvidia GPUs is surprisingly unintuitive. May need to do something custom
 Need to determine how to set the timespan of the monitor to start when the alert fliped from "alert" to "ok", signifying the start of a gaming session.  
