@@ -6,8 +6,11 @@ Utility to display stats from a gaming session
 In the initial state, contains agent configuration files with the assumption the agent is already installed and running on a windows machine  
 A docker image with config already completed will be added at a later date
 
+# Grafana
+Contains setup for creating all the dashboards in datadog in grafana.
+
 # Terraform 
-Contains terraform templates to create datadog monitors and dashboards that will be used to display the session stats
+Contains terraform templates to create datadog/grafana monitors and dashboards that will be used to display the session stats
 
 # Known Issues
 Currently only works with games running through steam, and sometimes inconsistently (ie, bladur's gate runs using ../bin/bg3.exe and thus is not cautght by steamapps)  
