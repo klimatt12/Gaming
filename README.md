@@ -1,10 +1,27 @@
 # Gaming
-Utility to display stats from a gaming session
+Utility to display stats from a gaming session.
+
+# Prereqs
+A user needs to have a gaming client (steam, epic, etc) set up on their computer, and games available on those platforms.
+A user needs to have an email address they can use for setting up free accounts for any tools that may require it (grafana, datadog)
+
+
+# Architecture
+
+The user needs to clone this repo to their gaming rig.
+Run the configurator and select: 
+
+    - monitoring solutions you want to use.
+
+provide any necessary info and wait for monitoring solutions to be provisioned.  This should provide links when complete.
+
+wait for monitoring clients to install on your computer.  
+start gaming and view results!
 
 
 # Datadog
-In the initial state, contains agent configuration files with the assumption the agent is already installed and running on a windows machine  
-A docker image with config already completed will be added at a later date
+In the initial state, contains agent configuration files with the assumption the agent is running on a windows machine  
+A docker image option is coming at a later date
 
 # Grafana
 Contains setup for creating all the dashboards in datadog in grafana.
