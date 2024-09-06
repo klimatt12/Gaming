@@ -22,7 +22,7 @@ start gaming and view results!
 # Datadog
 In the initial state, contains agent configuration files with the assumption the agent is running on a windows machine  
 A docker image option is coming at a later date  
-Instructions for creating a free trial can be found in the wiki section of this repo
+Instructions for creating a free trial can be found in the [wiki](https://github.com/klimatt12/Gaming/wiki/Create-Free-Trial-of-Datadog) section of this repo
 
 # Grafana
 Contains setup for creating all the dashboards in datadog in grafana.
