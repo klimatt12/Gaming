@@ -26,7 +26,7 @@ api_key: ${DD_API_KEY}
 ## Set to 'ap1.datadoghq.com' to send data to the AP1 site.
 ## Set to 'ddog-gov.com' to send data to the US1-FED site.
 #
-site: us5.datadoghq.com
+site: ${DD_SITE}
 
 ## @param dd_url - string - optional - default: https://app.datadoghq.com
 ## @env DD_DD_URL - string - optional - default: https://app.datadoghq.com

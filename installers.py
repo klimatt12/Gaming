@@ -5,6 +5,7 @@ from pathlib import Path
 import os
 import tkinter as tk
 from tkinter import simpledialog
+import shutil
 
 def install_prometheus():
     print("Installing Prometheus...")
@@ -35,15 +36,29 @@ def install_datadog():
 
         return api_key
 
-    # Call the function to prompt for the API key
-    DD_API_KEY = prompt_for_api_key()
+    def get_dd_site(DD_API_KEY):
+        sites = [
+            "datadoghq.com",
+            "us3.datadoghq.com",
+            "us5.datadoghq.com",
+        ]
+        for site in sites:
+            url = f"https://api.{site}/api/v1/validate"
+            headers = {
+                "DD-API-KEY": DD_API_KEY,
+            }
 
-    # Print the stored API key
-    if DD_API_KEY:
-        print(f"Datadog API Key: {DD_API_KEY}")
-    else:
-        print("No API Key was entered.")
-    """
+            try:
+                response = requests.get(url, headers=headers)
+                if response.status_code == 200:
+                    return site
+            except requests.RequestException as e:
+                print(f"Error connecting to {site}: {e}")
+
+    # Call the functions to prompt for the API key and site
+    DD_API_KEY = prompt_for_api_key()
+    DD_SITE = get_dd_site(DD_API_KEY)
+
     def get_latest_datadog_installer_url():
         # Updated URL of the Datadog Agent installer for Windows
         latest_installer_url = "https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi"
@@ -62,8 +77,9 @@ def install_datadog():
     def run_installer(filename):
         print(f"Running installer: {filename}...")
         try:
-            # Run the installer silently with no user interaction
-            subprocess.run(["msiexec", "/i", filename, "/quiet", "/norestart", "APIKEY=6c059264acd47467738641b961f650ec"], check=True)
+            # Run the installer silently and using the api key and site generated earlier
+            # Enable process monitoring so we can see the games
+            subprocess.run(["msiexec", "/i", filename, "/quiet", "/norestart", f"APIKEY={DD_API_KEY}", f"DD_SITE={DD_SITE}", "PROCESS_ENABLED=true"], check=True)
             print("Installation completed successfully.")
         except subprocess.CalledProcessError as e:
             print(f"Error during installation: {e}")
@@ -90,4 +106,3 @@ def install_datadog():
     # if installer_filepath.exists():
     #     os.remove(installer_filepath)
     #     print("Installer file removed.")
-    """
