@@ -111,6 +111,24 @@ def copy_files(source_dir, destination_dir):
     # Copy items from source to destination
     copy_item(source_dir, destination_dir)
 
+def restart_datadog_agent():
+    try:
+        # Check that the agent exists
+        agent_path = r"C:\Program Files\Datadog\Datadog Agent\bin\agent.exe"
+
+        # Execute the restart-service command
+        print("Restarting Datadog Agent service...")
+        result = subprocess.run([agent_path, "restart-service"], check=True, capture_output=True, text=True)
+
+        # Print the output and errors from the command
+        print(result.stdout)
+        if result.stderr:
+            print(f"Errors: {result.stderr}")
+
+        print("Datadog Agent service restarted successfully.")
+
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred while restarting the Datadog Agent: {e}")
 
 def main():
     print("Installing Datadog")
@@ -134,6 +152,8 @@ def main():
     #Copy the config files
     copy_files(source_directory, destination_directory)
 
+# Restart the agent to pick up changes
+    restart_datadog_agent()
 
 if __name__ == "__main__":
     main()
