@@ -20,7 +20,7 @@ start gaming and view results!
 
 
 # Datadog
-In the initial state, contains agent configuration files with the assumption the agent is running on a windows machine  
+In the initial state, contains agent configuration files with the assumption the agent is running on a windows machine.   
 A docker image option is coming at a later date  
 Instructions for creating a free trial can be found in the [wiki](https://github.com/klimatt12/Gaming/wiki/Create-Free-Trial-of-Datadog) section of this repo
 
@@ -31,8 +31,9 @@ Contains setup for creating all the dashboards in datadog in grafana.
 Contains terraform templates to create datadog/grafana monitors and dashboards that will be used to display the session stats
 
 # Known Issues
-Currently only works with games running through steam, and sometimes inconsistently (ie, bladur's gate runs using ../bin/bg3.exe and thus is not cautght by steamapps)  
-Some games don't really have any indication what they are (ie, slay the spire shows as javaw)  
+Steam games are mostly reliable, but if it runs without referencing steamapps it won't be caught (ie, bladur's gate runs using ../bin/bg3.exe)  
+I only currently have 2 games installed on epic - both are caught by -epicapp=, but this may not always be the case  
+Some games don't really have any indication what they are (ie, slay the spire shows as javaw)   
 Dashboard needs to be referenced in a more robust way  
 Getting stats from Nvidia GPUs is surprisingly unintuitive. May need to do something custom
 Need to determine how to set the timespan of the monitor to start when the alert fliped from "alert" to "ok", signifying the start of a gaming session.  
