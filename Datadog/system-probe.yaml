@@ -9,7 +9,7 @@
 ## Uncomment this parameter and the one below to enable them.
 #
 system_probe_config:
-  process_config:
+  #process_config:
     enabled: true
 
   ## @param sysprobe_socket - string - optional - default: localhost:3333
