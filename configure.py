@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import sys
 import installers
+import ddinstaller
 
 def on_submit():
     # Collect selected options
@@ -99,7 +100,7 @@ def show_confirmation_dialog(selected_options):
             elif option == "Grafana":
                 installers.install_grafana()
             elif option == "Datadog":
-                installers.install_datadog()
+                ddinstaller.main()
         root.destroy()  # Close the application window
         sys.exit()  # Terminate the script
     else:
