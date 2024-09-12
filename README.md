@@ -5,6 +5,11 @@ Utility to display stats from a gaming session.
 - A user needs to have a gaming client (steam, epic, etc) set up on their computer, and games available on those platforms.  
 - A user needs to have an email address they can use for setting up free accounts for any tools that may require it (grafana, datadog)
 
+# Overview
+- Code Tab: contains all the code for all the utilities available.
+- Wiki Tab: contains various how-tos and overviews.
+- Projects: A simple work tracking board, used for the author to keep track of WIP and completed items. 
+
 
 # Architecture
 
