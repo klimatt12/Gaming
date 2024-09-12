@@ -5,6 +5,7 @@ import os
 import tkinter as tk
 from tkinter import simpledialog
 import shutil
+import sys
 
 
 def prompt_for_api_key():
@@ -79,6 +80,7 @@ def run_installer(filename):
         print("Installation completed successfully.")
     except subprocess.CalledProcessError as e:
         print(f"Error during installation: {e}")
+        sys.exit(1)
 
 def copy_item(src, dst):
     """
