@@ -1,4 +1,3 @@
-import time
 import requests
 import subprocess
 from pathlib import Path
