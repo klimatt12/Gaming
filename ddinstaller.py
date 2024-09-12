@@ -21,12 +21,15 @@ def prompt_for_api_key():
 
     # Destroy the root window
     root.destroy()
+
+    # Set the DD_API_KEY environment variable and return the key for use during install
     subprocess.run(['powershell', '-Command',
                     f'[System.Environment]::SetEnvironmentVariable("DD_API_KEY", "{api_key}", "Machine")'])
     return api_key
 
 
 def get_dd_site(DD_API_KEY):
+    # Test the different datadog us sites to find the correct one for our api key
     sites = [
         "datadoghq.com",
         "us3.datadoghq.com",
@@ -41,6 +44,7 @@ def get_dd_site(DD_API_KEY):
         try:
             response = requests.get(url, headers=headers)
             if response.status_code == 200:
+                # Set the DD_SITE environment variable and return the site for use during install
                 subprocess.run(['powershell', '-Command',
                                 f'[System.Environment]::SetEnvironmentVariable("DD_SITE", "{site}", "Machine")'])
                 return site
@@ -97,23 +101,6 @@ def copy_item(src, dst):
         shutil.copy2(src, dst)
         print(f'Copied {src} to {dst}')
 
-
-def copy_files(source_dir, destination_dir):
-    """
-    Copy all files and directories from source_dir to destination_dir, only
-    overwriting files that exist in the target directory.
-    """
-    if not os.path.exists(source_dir):
-        print(f"Source directory {source_dir} does not exist.")
-        return
-
-    # Ensure destination directory exists
-    if not os.path.exists(destination_dir):
-        os.makedirs(destination_dir)
-
-    # Copy items from source to destination
-    copy_item(source_dir, destination_dir)
-
 def restart_datadog_agent():
     try:
         # Check that the agent exists
@@ -140,7 +127,6 @@ def main():
     installer_filename = "datadog-agent-installer.msi"
     installer_filepath = downloads_folder / installer_filename
     url = get_latest_datadog_installer_url()
-    installer_filename = "datadog-agent-installer.msi"
     script_dir = os.path.dirname(os.path.abspath(__file__))
     source_directory = os.path.join(script_dir, 'Datadog')  # Adjust as needed
     destination_directory = r'C:\ProgramData\Datadog'
@@ -153,7 +139,7 @@ def main():
     run_installer(installer_filepath)
 
     #Copy the config files
-    copy_files(source_directory, destination_directory)
+    copy_item(source_directory, destination_directory)
 
 # Restart the agent to pick up changes
     restart_datadog_agent()
