@@ -21,7 +21,8 @@ def prompt_for_api_key():
 
     # Destroy the root window
     root.destroy()
-
+    subprocess.run(['powershell', '-Command',
+                    f'[System.Environment]::SetEnvironmentVariable("DD_API_KEY", "{api_key}", "Machine")'])
     return api_key
 
 
@@ -40,6 +41,8 @@ def get_dd_site(DD_API_KEY):
         try:
             response = requests.get(url, headers=headers)
             if response.status_code == 200:
+                subprocess.run(['powershell', '-Command',
+                                f'[System.Environment]::SetEnvironmentVariable("DD_SITE", "{site}", "Machine")'])
                 return site
         except requests.RequestException as e:
             print(f"Error connecting to {site}: {e}")
