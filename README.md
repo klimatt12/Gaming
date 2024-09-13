@@ -9,7 +9,9 @@ Utility to display stats from a gaming session.
 - Code Tab: contains all the code for all the utilities available.
 - Wiki Tab: contains various how-tos and overviews.
 - Projects: A simple work tracking board, used for the author to keep track of WIP and completed items.
-- Actions: view details about github actions executions.  Code for these can be found in the .guthub folder 
+- Issues: create work items here  
+  **do not use apostrophes, they are interpretted as single quotes and will cause failures! as of 9/13**
+- Actions: view details about github actions executions.  Code for these can be found in the .guthub folder
 
 
 # Architecture
