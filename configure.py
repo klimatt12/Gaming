@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
 import sys
-import installers
 import ddinstaller
+import prominstaller
 
 def on_submit():
     # Collect selected options
@@ -96,9 +96,9 @@ def show_confirmation_dialog(selected_options):
         # Proceed with the installation (call the install functions)
         for option in selected_options:
             if option == "Prometheus":
-                installers.install_prometheus()
+                prominstaller.main()
             elif option == "Grafana":
-                installers.install_grafana()
+                print("There is no install necessary for grafana")
             elif option == "Datadog":
                 ddinstaller.main()
         root.destroy()  # Close the application window

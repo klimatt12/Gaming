@@ -3,3 +3,4 @@ venv/
 __pycache__
 Terraform/.terraform.lock.hcl
 Terraform/.terraform
+data
