@@ -48,7 +48,8 @@ jobs:
     - name: Set issue title environment variable
       id: set_title
       run: |
-        echo "ISSUE_TITLE=$(echo '${{ steps.get_issue.outputs.data }}' | jq -r '.title')" >> $GITHUB_ENV
+        ISSUE_TITLE=$(echo '${{ steps.get_issue.outputs.data }}' | jq -r '.title')
+        echo "ISSUE_TITLE=$ISSUE_TITLE" >> $GITHUB_ENV
 
     - name: Rename the issue
       uses: octokit/request-action@v2.x
