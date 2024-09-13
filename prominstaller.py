@@ -33,7 +33,7 @@ def extract_zip(filename, extract_folder):
 
 
 def update_config(config_path):
-    backup_config_path = r"..\Prometheus\prometheus.yml"
+    backup_config_path = r"Prometheus\prometheus.yml"
 
     if not os.path.isfile(backup_config_path):
         raise FileNotFoundError(f"Backup config file not found at {backup_config_path}")
