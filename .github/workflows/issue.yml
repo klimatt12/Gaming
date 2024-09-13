@@ -1,0 +1,80 @@
+name: Rename Issue on Open
+
+on:
+  issues:
+    types:
+      - opened
+
+permissions:
+  issues: write
+  contents: write
+
+jobs:
+  rename-issue:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Get current issue number
+      id: get_number
+      run: |
+        if [ -f .github/issue_number.txt ]; then
+          issue_number=$(cat .github/issue_number.txt)
+        else
+          issue_number=0
+        fi
+        echo "Current issue number is $issue_number"
+        echo "issue_number=$issue_number" >> $GITHUB_ENV
+
+    - name: Increment issue number
+      id: increment
+      run: |
+        new_number=$(printf "%03d" $((10#$issue_number + 1)))
+        echo "New issue number is $new_number"
+        echo $new_number > .github/issue_number.txt
+        echo "new_number=$new_number" >> $GITHUB_ENV
+
+    - name: Get issue details
+      id: get_issue
+      uses: octokit/request-action@v2.x
+      with:
+        route: GET /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}
+        headers: '{"Accept": "application/vnd.github+json"}'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set issue title environment variable
+      id: set_title
+      run: |
+        echo "ISSUE_TITLE=$(echo '${{ steps.get_issue.outputs.data }}' | jq -r '.title')" >> $GITHUB_ENV
+
+    - name: Rename the issue
+      uses: octokit/request-action@v2.x
+      with:
+        route: PATCH /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}
+        data: |
+          {
+            "title": "game-${{ env.new_number }}: ${{ env.ISSUE_TITLE }}"
+          }
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Check for local changes
+      run: |
+        git status
+        git diff --exit-code || echo "Local changes detected"
+
+    - name: Pull latest changes
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
+        git fetch origin
+        git rebase origin/main || echo "Rebase failed. Handling conflicts manually."
+
+    - name: Commit updated issue number
+      run: |
+        git add .github/issue_number.txt
+        git commit -m "Update issue number to ${{ env.new_number }}" || echo "No changes to commit"
+        git push || echo "Push failed. Possibly due to concurrent changes."
