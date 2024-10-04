@@ -39,9 +39,9 @@ Contains setup for creating all the dashboards in datadog in grafana.
 Contains terraform templates to create datadog/grafana monitors and dashboards that will be used to display the session stats
 
 # Known Issues
-Steam games are mostly reliable, but if it runs without referencing steamapps it won't be caught (ie, bladur's gate runs using ../bin/bg3.exe)  
 I only currently have 2 games installed on epic - both are caught by -epicapp=, but this may not always be the case  
 Some games don't really have any indication what they are (ie, slay the spire shows as javaw)   
 Dashboard needs to be referenced in a more robust way  
-Getting stats from Nvidia GPUs is surprisingly unintuitive. May need to do something custom
-Need to determine how to set the timespan of the monitor to start when the alert fliped from "alert" to "ok", signifying the start of a gaming session.  
+Need to determine how to set the timespan of the monitor to start when the alert fliped from "alert" to "ok", signifying the start of a gaming session. 
+
+
