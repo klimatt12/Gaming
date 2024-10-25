@@ -3,6 +3,7 @@ from tkinter import messagebox
 import sys
 import ddinstaller
 import prominstaller
+import grafanainstaller
 
 def on_submit():
     # Collect selected options
@@ -98,7 +99,7 @@ def show_confirmation_dialog(selected_options):
             if option == "Prometheus":
                 prominstaller.main()
             elif option == "Grafana":
-                print("There is no install necessary for grafana")
+                grafanainstaller.main()
             elif option == "Datadog":
                 ddinstaller.main()
         root.destroy()  # Close the application window

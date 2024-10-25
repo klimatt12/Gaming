@@ -45,3 +45,5 @@ if __name__ == "__main__":
     if grafana_file:
         install_grafana(grafana_file)
         cleanup(grafana_file)
+# alter this so that it calls all other defs from main
+# main()
