@@ -127,28 +127,28 @@ root = tk.Tk()
 root.title("Select Options")
 
 # Set the default window size (width x height)
-root.geometry("350x250")  # Adjust the size as needed
+root.geometry("300x300")  # Adjust the size as needed
 
 # Create BooleanVar objects to hold the state of the checkboxes
 var_grafana = tk.BooleanVar()
 var_datadog = tk.BooleanVar()
-var_prometheus = tk.BooleanVar()
-var_nvidia_gpumon = tk.BooleanVar()
-var_afterburner_mon = tk.BooleanVar()
+var_prometheus = tk.BooleanVar()  # New variable for Prometheus
+var_nvidia_gpumon = tk.BooleanVar()  # New variable for nvidia_gpumon
+var_afterburner_mon = tk.BooleanVar()  # New variable for afterburner_mon
 
 # Create checkboxes
 checkbox_prometheus = tk.Checkbutton(root, text="Prometheus", variable=var_prometheus)  # Moved to the top
 checkbox_grafana = tk.Checkbutton(root, text="Grafana", variable=var_grafana)
 checkbox_datadog = tk.Checkbutton(root, text="Datadog", variable=var_datadog)
-checkbox_nvidia_gpumon = tk.Checkbutton(root, text="Run nvidia_gpumon.py at startup?", variable=var_nvidia_gpumon)
-checkbox_afterburner_mon = tk.Checkbutton(root, text="Run afterburner_mon.py at startup?", variable=var_afterburner_mon)
+checkbox_nvidia_gpumon = tk.Checkbutton(root, text="Run nvidia_gpumon.py at startup", variable=var_nvidia_gpumon)
+checkbox_afterburner_mon = tk.Checkbutton(root, text="Run afterburner_mon.py at startup", variable=var_afterburner_mon)
 
 # Place the checkboxes in the window
-checkbox_prometheus.pack(anchor="w", padx=20, pady=5)
-checkbox_grafana.pack(anchor="w", padx=20, pady=5)
-checkbox_datadog.pack(anchor="w", padx=20, pady=5)
-checkbox_nvidia_gpumon.pack(anchor="w", padx=20, pady=5)
-checkbox_afterburner_mon.pack(anchor="w", padx=20, pady=5)
+checkbox_prometheus.pack(anchor="w", padx=20, pady=5)  # Prometheus first
+checkbox_grafana.pack(anchor="w", padx=20, pady=5)  # Grafana second
+checkbox_datadog.pack(anchor="w", padx=20, pady=5)  # Datadog last
+checkbox_nvidia_gpumon.pack(anchor="w", padx=20, pady=5)  # nvidia_gpumon
+checkbox_afterburner_mon.pack(anchor="w", padx=20, pady=5)  # afterburner_mon
 
 # Create and place the Submit button
 submit_button = tk.Button(root, text="Submit", command=on_submit)
